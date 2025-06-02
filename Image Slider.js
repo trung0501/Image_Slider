@@ -1,11 +1,12 @@
+// Initialize the slider's operation logic
 const initSlider = () => {
-    const imageList = document.querySelector(".slider-wrapper .image-list");
-    const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
-    const sliderScrollbar = document.querySelector(".container .slider-scrollbar");
-    const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb");
-    const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+    const imageList = document.querySelector(".slider-wrapper .image-list");   // Danh sách ảnh cần cuộn 
+    const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");   // 2 nút mũi tên 2 chiều để cuộn ảnh   
+    const sliderScrollbar = document.querySelector(".container .slider-scrollbar");   // Vùng thanh cuộn 
+    const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb");   // Nút trên thanh cuộn 
+    const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;   // Khoảng cách các ảnh 
     
-    // Handle scrollbar thumb drag
+    // Handle scrollbar with the mouse (xử lý thanh cuộn bằng chuột)
     scrollbarThumb.addEventListener("mousedown", (e) => {
         const startX = e.clientX;
         const thumbPosition = scrollbarThumb.offsetLeft;
@@ -15,7 +16,8 @@ const initSlider = () => {
         const handleMouseMove = (e) => {
             const deltaX = e.clientX - startX;
             const newThumbPosition = thumbPosition + deltaX;
-            // Ensure the scrollbar thumb stays within bounds
+
+            // Ensure the scrollbar thumb stays within bounds (đảm bảo thanh cuộn nằm trong giới hạn)
             const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
             const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
             
