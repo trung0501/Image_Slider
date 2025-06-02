@@ -24,7 +24,8 @@ const initSlider = () => {
             scrollbarThumb.style.left = `${boundedPosition}px`;
             imageList.scrollLeft = scrollPosition;
         }
-        // Remove event listeners on mouse up
+
+        // Stop drag when releasing mouse (dừng kéo khi thả chuột)
         const handleMouseUp = () => {
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
@@ -33,7 +34,8 @@ const initSlider = () => {
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
     });
-    // Slide images according to the slide button clicks
+
+    // Left and right navigation buttons
     slideButtons.forEach(button => {
         button.addEventListener("click", () => {
             const direction = button.id === "prev-slide" ? -1 : 1;
@@ -41,22 +43,27 @@ const initSlider = () => {
             imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
         });
     });
-     // Show or hide slide buttons based on scroll position
+
+    // Show or hide slide buttons based on scroll position (hiển thị hoặc ẩn các nút trượt dựa trên vị trí cuộn)
     const handleSlideButtons = () => {
         slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "flex";
         slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
     }
-    // Update scrollbar thumb position based on image scroll
+
+    // Update scrollbar thumb position based on image scroll (cập nhật vị trí scrollbar thumb khi cuộn bằng nút)
     const updateScrollThumbPosition = () => {
         const scrollPosition = imageList.scrollLeft;
         const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
         scrollbarThumb.style.left = `${thumbPosition}px`;
     }
-    // Call these two functions when image list scrolls
+
+    // Assign event when photo list scrolls (gán sự kiện khi cuộn danh sách ảnh)
     imageList.addEventListener("scroll", () => {
         updateScrollThumbPosition();
         handleSlideButtons();
     });
 }
+
+// Restart when page loads or resizes (khởi động lại khi trang load hoặc resize:)
 window.addEventListener("resize", initSlider);
 window.addEventListener("load", initSlider);
