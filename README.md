@@ -39,3 +39,23 @@
    3. Attach mousedown, mousemove, mouseup events to let users drag the scrollbar to control the image.
 
    4. Attach scroll events to update the scrollbar position and hide/show arrow buttons as needed.
+
+✅ Advantages:
+
+   1. Beautiful, friendly, modern interface.
+
+   2. Allow the image rolls with an arrow button, drag the mouse, or pull the scroll bar.
+
+   3. Customized roll bar is suitable for the overall design
+
+   4. Responsive: automatically adjust on mobile devices, hide navigation buttons.
+
+   5. Do not use an external library, simple, easy to understand code.
+
+❌ Limit:
+
+   1. Fix the number of photos and image size (not flexible self -stretching).
+
+   2. There is no feature to zoom in or open the lightbox
+
+   3. Slider does not base between the image being viewed.
